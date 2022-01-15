@@ -9,7 +9,6 @@ import 'package:useditem/Views/Layouts/HomeScreen.dart';
 import 'package:useditem/Views/Screens/SearchScreen.dart';
 import 'package:useditem/Views/Screens/product/AddProductScreen.dart';
 import 'package:useditem/Views/Screens/Auth/ForgetPassword.dart';
-import 'package:useditem/Views/Screens/Auth/ForgetPassword.dart';
 import 'package:useditem/Views/Screens/Auth/LoginScreen.dart';
 import 'package:useditem/Views/Screens/Auth/RegisterScreen.dart';
 import 'package:useditem/Views/Screens/Auth/WelcomScreen.dart';

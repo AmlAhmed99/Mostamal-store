@@ -11,7 +11,7 @@ class ProductScreen extends StatelessWidget {
 
   final Stream<QuerySnapshot> prodtstream =
   FirebaseFirestore.instance.collection('products').snapshots();
-
+  final controller = Get.find<ProductController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,23 +48,53 @@ class ProductScreen extends StatelessWidget {
                              color: Colors.white
                          ),),
                          SizedBox(height:10,),
-                         TextField(
-                           decoration: InputDecoration(
-                               border: OutlineInputBorder(
-                                 borderRadius: BorderRadius.circular(10.0),
-                                 borderSide: BorderSide(
-                                   width: 0,
-                                   style: BorderStyle.none,
+                         InkWell(
+                           child: Container(
+                             width: double.infinity,
+                             height: 50,
+                             decoration: BoxDecoration(
+                               color:Colors.white,
+                               borderRadius: BorderRadius.circular(10.0),
+                             ),
+                             child: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                               children: [
+                                 Row(
+                                   children: [
+                                     SizedBox(width:10,),
+                                     Icon(Icons.search,color:  Colors.grey,),
+                                     SizedBox(width:10,),
+                                     Text('tap here to search',style:TextStyle(color: Colors.grey)),
+                                   ],
                                  ),
-                               ),
-                               filled: true,
-                               hintStyle: TextStyle(color: Colors.grey),
-                               hintText: "Search With name",
-                               fillColor: Colors.white,
-                               prefixIcon: Icon(Icons.search),
 
+                                 Icon(Icons.arrow_forward_ios_sharp,color:  Colors.grey,),
+
+                               ],
+                             ),
                            ),
+                           onTap: (){
+                             Get.toNamed(Routes.SearchScreenRout);
+                           },
                          )
+                         // TextField(
+                         //   decoration: InputDecoration(
+                         //       border: OutlineInputBorder(
+                         //         borderRadius: BorderRadius.circular(10.0),
+                         //         borderSide: BorderSide(
+                         //           width: 0,
+                         //           style: BorderStyle.none,
+                         //         ),
+                         //       ),
+                         //       filled: true,
+                         //       hintStyle: TextStyle(color: Colors.grey),
+                         //       hintText: "Search With name",
+                         //       fillColor: Colors.white,
+                         //       prefixIcon: Icon(Icons.search),
+                         //
+                         //   ),
+                         // )
+
                        ],
                      ),
                    ),
@@ -86,7 +116,10 @@ class ProductScreen extends StatelessWidget {
                      }
 
                      if (snapshot.connectionState == ConnectionState.waiting) {
-                       return Text("Loading");
+                       return  LinearProgressIndicator(
+                         color: AppColor.primaryColor,
+                         backgroundColor:  AppColor.primaryColor,
+                       );
                      }
 
                      return  Expanded(
@@ -101,8 +134,13 @@ class ProductScreen extends StatelessWidget {
                          itemBuilder: (context,index){
                          DocumentSnapshot mytransaction = snapshot.data!.docs[index];
                          return snapshot.data!.docs.length==0
-                             ?Center(child: Text("empty WatchList Items"))
-                             : ProductWidget(mytransaction);
+                             ?Column(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                             Image.asset('assets/images/noItem.png'),
+                             Text('Empty Product List'),
+                           ],
+                         ) : ProductWidget(mytransaction);
                        },
                          itemCount: snapshot.data!.docs.length,
                        ),

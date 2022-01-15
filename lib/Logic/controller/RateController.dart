@@ -1,10 +1,12 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:useditem/FirebaseUtiles/FirebaseUtiles.dart';
 import 'package:useditem/Models/RateModel.dart';
+import 'package:useditem/Styles/Colors.dart';
 
 class RateController extends GetxController  {
   RateModel? myRate;
@@ -24,10 +26,22 @@ class RateController extends GetxController  {
     doc.set(rate).then((addedProduct) {
       update();
       print('success');
-      Fluttertoast.showToast(msg: "your rate added successfully! thank you!", toastLength: Toast.LENGTH_LONG);
+      Get.snackbar(
+        "Done",
+        "product added successfully!",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor:AppColor.primaryColor,
+        colorText: Colors.white,
+      );
     }).onError((error, stackTrace) {
       print('on error');
-      Fluttertoast.showToast(msg: error.toString(), toastLength: Toast.LENGTH_LONG);
+      Get.snackbar(
+        "Error",
+        error.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor:AppColor.primaryColor,
+        colorText: Colors.white,
+      );
     });
 
   }

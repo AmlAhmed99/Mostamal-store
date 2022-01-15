@@ -43,35 +43,40 @@ class AddProductScreen extends StatelessWidget {
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [
-                          ConditionalBuilder(
-                            condition: controller.imageFile != null,
-                            builder: (context) =>
-                                GetBuilder<ProductController>(builder: (_) {
-                              return Container(
-                                height: 200,
-                                width: 200,
-                                decoration: BoxDecoration(
-                                  color: AppColor.primaryColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    image:
-                                        FileImage(File(controller.imageFile!.path)),
+                          GetBuilder<ProductController>(builder: (_) {
+                            return ConditionalBuilder(
+                              condition: controller.imageFile != null,
+                              builder: (context) =>
+                                  GetBuilder<ProductController>(builder: (_) {
+                                    return Container(
+                                      height: 200,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        color: AppColor.primaryColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                          image: FileImage(
+                                              File(controller.imageFile!.path)),
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                              fallback: (context) =>
+                                  Container(
+                                    height: 200,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                      color: AppColor.primaryColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/img4.jpg"),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
-                            fallback: (context) => Container(
-                              height: 200,
-                              width: 200,
-                              decoration: BoxDecoration(
-                                color: AppColor.primaryColor,
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: AssetImage("assets/images/img4.jpg"),
-                                ),
-                              ),
-                            ),
-                          ),
+                            );
+
+                          }),
                           Positioned(
                             bottom: 10,
                             right: 10,
@@ -136,8 +141,9 @@ class AddProductScreen extends StatelessWidget {
                                 controller.addProduct(
                                     price: priceController.text,
                                     name: nameController.text,
-                                  imgURL: controller.imageFile!.path
+
                                 );
+
                               }
                             },
                           ),

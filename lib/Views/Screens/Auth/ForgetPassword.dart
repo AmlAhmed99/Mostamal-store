@@ -44,7 +44,7 @@ class ForgetPassword extends StatelessWidget {
               },
             ),
             SizedBox(height: 50,),
-            GetBuilder(builder: (_){
+            GetBuilder<AuthController>(builder: (_){
               return  CustomButton(
                 width: 0,
                 backgroundColor: MaterialStateProperty.all(Color.fromRGBO(129, 225, 209, 1.0)),

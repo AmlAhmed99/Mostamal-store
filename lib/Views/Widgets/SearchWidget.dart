@@ -8,10 +8,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:useditem/Models/ProductModel.dart';
 import 'package:useditem/Styles/Colors.dart';
 
-class CardWidget extends StatelessWidget {
-  var results;
+class SearchWidget extends StatelessWidget {
 
-  CardWidget(this.results,);
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -56,7 +54,7 @@ class CardWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),topLeft:Radius.circular(10) ),
                   image: DecorationImage(
-                      image: NetworkImage(results['imgURL']),
+                      image: NetworkImage(''),
                       fit: BoxFit.cover
                   ),
                 ),
@@ -71,13 +69,13 @@ class CardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(results['name'],maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(
+                    Text('name',maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.black
                     ),),
                     SizedBox(height: 20,),
-                    Text('price: ${results['price']}',style: TextStyle(
+                    Text('price',style: TextStyle(
                         color: Colors.grey,
                         fontSize: 15
                     ),),

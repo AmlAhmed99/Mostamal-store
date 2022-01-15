@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
+import 'package:useditem/FirebaseUtiles/FirebaseUtiles.dart';
 import 'package:useditem/Views/Screens/card/CardScreen.dart';
 import 'package:useditem/Views/Screens/product/ProductScreen.dart';
 import 'package:useditem/Views/Screens/profile/ProfileScreen.dart';
@@ -19,6 +20,7 @@ class MainController extends GetxController  {
     selectedIndex = index;
     update();
   }
+
 
 
 }

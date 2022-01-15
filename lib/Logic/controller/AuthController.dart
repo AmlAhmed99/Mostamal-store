@@ -6,10 +6,12 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import 'package:get/state_manager.dart';
 import 'package:useditem/FirebaseUtiles/FirebaseUtiles.dart';
+import 'package:useditem/Models/ProductModel.dart';
 import 'package:useditem/Models/UserModel.dart' as MyUser;
 import 'package:useditem/Routes/AppRoutes.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:useditem/Styles/Colors.dart';
 
 
 class AuthController extends GetxController  {
@@ -42,7 +44,8 @@ class AuthController extends GetxController  {
       final usersCollectionRef = getUsersCollectionWithConverter();
       final user =
       MyUser.UserModel(id: userCredential.user!.uid, name:name ,
-          email: email);
+          email: email,
+      );
       usersCollectionRef.doc(user.id)
           .set(user)
           .then((value){
@@ -68,7 +71,7 @@ class AuthController extends GetxController  {
         title,
         message,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
+        backgroundColor: AppColor.primaryColor,
         colorText: Colors.white,
       );
     } catch (error) {
@@ -76,7 +79,7 @@ class AuthController extends GetxController  {
         'Error!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
         colorText: Colors.white,
       );
     }
@@ -121,7 +124,7 @@ class AuthController extends GetxController  {
         title,
         message,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
+        backgroundColor:AppColor.primaryColor,
         colorText: Colors.white,
       );
     } catch (error) {
@@ -129,7 +132,7 @@ class AuthController extends GetxController  {
         'Error!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
         colorText: Colors.white,
       );
     }
@@ -155,7 +158,7 @@ class AuthController extends GetxController  {
         title,
         message,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
+        backgroundColor:AppColor.primaryColor,
         colorText: Colors.white,
       );
     } catch (error) {
@@ -163,7 +166,7 @@ class AuthController extends GetxController  {
         'Error!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
         colorText: Colors.white,
       );
     }
@@ -195,11 +198,28 @@ class AuthController extends GetxController  {
         'Error!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
         colorText: Colors.white,
       );
     }
   }
 
+  static bool checkLoggedInUser(){
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+    if(firebaseUser!=null){
+      // retrieve current user data from fire store notify
+      //    listeners
+      getUsersCollectionWithConverter()
+          .doc(firebaseUser.uid).get()
+          .then((retUser) {
+        if(retUser.data()!=null)
+        {
+          currentUser=retUser.data();
+        }
+      });
+
+    }
+    return firebaseUser!=null;
+  }
 
 }

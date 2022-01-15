@@ -17,7 +17,7 @@ class defaultFormField extends StatelessWidget {
       {
         required this.type,
          this.controller,
-        required this.label,
+         this.label,
          this.prefix,
          this.suffix,
          this.obscuretext = false,

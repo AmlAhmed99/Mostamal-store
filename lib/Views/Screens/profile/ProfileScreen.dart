@@ -1,12 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:useditem/Logic/controller/profileController.dart';
+import 'package:useditem/Routes/AppRoutes.dart';
 import 'package:useditem/Styles/Colors.dart';
 import 'package:useditem/Views/Widgets/CustomButton.dart';
 import 'package:useditem/Views/Widgets/bottomsheet.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
 
+  final controller = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +54,7 @@ class ProfileScreen extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all(Colors.white),
               label: "Profile",
               onPressed: (){
+                Get.toNamed(Routes.profileScreenRoute);
               },
               color:Colors.black,
               icon: Icons.person,
@@ -64,6 +67,7 @@ class ProfileScreen extends StatelessWidget {
               label: "Messages",
               icon: Icons.message,
               onPressed: (){
+               Get.toNamed(Routes.ChatsScreenRout);
               },
               color:Colors.black,
               type: MainAxisAlignment.start,
@@ -75,21 +79,27 @@ class ProfileScreen extends StatelessWidget {
               label: "Settings",
               icon: Icons.settings,
               onPressed: (){
+                Get.toNamed(Routes.settingsScreenRoute);
               },
               color:Colors.black,
               type: MainAxisAlignment.start,
             ),
             SizedBox(height: 15,),
-            CustomButton(
-              width:30,
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-              label: "Logout",
-              icon: Icons.logout,
-              onPressed: (){
-              },
-              color:Colors.black,
-              type: MainAxisAlignment.start,
-            ),
+            GetBuilder<ProfileController>(builder: ((_){
+              return  CustomButton(
+                width:30,
+                backgroundColor: MaterialStateProperty.all(Colors.white),
+                label: "Logout",
+                icon: Icons.logout,
+                onPressed: (){
+                  controller.signOut().then((value) => Get.offNamed(Routes.LoginScreenRout));
+                },
+                color:Colors.black,
+                type: MainAxisAlignment.start,
+              );
+            })),
+
+
 
 
           ],

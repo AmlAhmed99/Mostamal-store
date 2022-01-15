@@ -36,6 +36,7 @@ class BottomSheetWidget extends StatelessWidget {
                     icon: Icon(Icons.camera_alt),
                     onPressed: () {
                       controller.takePhoto(ImageSource.camera);
+
                     },
 
                   );
